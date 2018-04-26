@@ -1,0 +1,49 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ pokemon.name }}{% endblock %}
+{% block content %}
+<script>var pokemon=JSON.parse(("{{ pokemon.json }}").replace(/\&#039;/g,'"'));;</script>
+<p>
+   <h2>{{ pokemon.name }} <img src="data:image/jpeg;base64,{{ pokemon.image }}"></h2></h2>
+    <p>Type: 
+		<strong>
+			{{ pokemon.type_1 }}
+				{% if pokemon.id_type_2 %}
+					{{ pokemon.type_2 }}
+				{% endif %}
+		</strong>
+	</p>
+    {% if pokemon.level %}
+		<p>niveau: <strong>{{ pokemon.level }}</strong><input type="button" onclick="upGrade({{ pokemon.id }});"</p>
+		<p>entraineur: 
+			<a href="{{ path('trainer', { 'id': pokemon.id_trainer }) }}">
+				<strong>{{ pokemon.trainer.name}}</strong>
+			</a>
+		</p>
+	{% endif %}
+    
+	
+    <p>attaque: 
+		{% if pokemon.id_attack %}
+				<strong>{{ pokemon.attack }}</strong> (débloquée  {% if pokemon.level<pokemon.level_evolution %}à partir du {% else %}depuis le {% endif %} niveau: {{ pokemon.level_attack_unlocked }})<br>	
+				<em>{{ pokemon.desc_attack }}</em>
+		{% else %}
+			<em>ce pokemon est sauvage: il n'a pas été entrainé.<em>
+		{% endif %}
+	</p>
+	
+    <p>évolution: 
+		{% if pokemon.id_parent %}
+			<a href="{{ path('pokemon', { 'id': pokemon.id_parent }) }}">
+				<strong>{{ pokemon.parent }}</strong>
+			</a>			
+		{% else %}
+			niveau max.
+		{% endif %}
+	</p>
+    {% if pokemon.level_evolution %}
+		<p>level_evolution: <strong>{{ pokemon.level_evolution }}</strong></p>
+	{% endif %}
+
+</p>
+{% endblock %}

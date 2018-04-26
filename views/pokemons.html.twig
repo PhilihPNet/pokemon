@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Liste des Pokemons connus{% endblock %}
+
+{% block content %}
+<p>
+    <h3>Pokemons</h3>
+    {% for pokemon in pokemons %}
+	
+		<a href="{{ path('pokemon', { 'id': pokemon.id }) }}">
+			<strong>{{ pokemon.name }}</strong>
+			
+			<img src="data:image/jpeg;base64,{{ pokemon.image }}" alt="" /> 
+		</a>
+<br>{% else %}
+        No pokemons yet.
+    {% endfor %}
+</p>
+{% endblock %}

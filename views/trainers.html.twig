@@ -1,0 +1,13 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Listes des entraineurs{% endblock %}
+
+{% block content %}
+    <h3>Trainers</h3>
+
+{% for trainer in trainers %}
+<article>
+    <h2><a class="trainerTitle" href="{{ path('trainer', { 'id': trainer.id }) }}">{{ trainer.name }}</a></h2>
+</article>
+{% endfor %}
+{% endblock %}

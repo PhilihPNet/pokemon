@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ trainer.name }}{% endblock %}
+
+{% block content %}
+<p>
+    <h2>{{ trainer.name }}</h2>
+    <p>{{ trainer.gender }}</p>
+    <h3>Pokemons</h3>
+    {% for pokemon in pokemons %}
+		<a href="{{ path('pokemon', { 'id': pokemon.id }) }}">
+			<strong>{{ pokemon.name }}</strong> id : {{ pokemon.id }}
+			<img src="data:image/jpeg;base64,{{ pokemon.image }}"/>
+		</a><br>
+ {% else %}
+        No pokemons yet.
+    {% endfor %}
+</p>
+{% endblock %}
