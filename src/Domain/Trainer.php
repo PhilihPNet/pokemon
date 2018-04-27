@@ -23,7 +23,6 @@ class Trainer
      *
      * @var string
      */
-    private $name;
 
     public function getId() {
         return $this->id;

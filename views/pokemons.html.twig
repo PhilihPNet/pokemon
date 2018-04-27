@@ -3,17 +3,33 @@
 {% block title %}Liste des Pokemons connus{% endblock %}
 
 {% block content %}
+
 <p>
     <h3>Pokemons</h3>
     {% for pokemon in pokemons %}
-	
-		<a href="{{ path('pokemon', { 'id': pokemon.id }) }}">
-			<strong>{{ pokemon.name }}</strong>
-			
-			<img src="data:image/jpeg;base64,{{ pokemon.image }}" alt="" /> 
-		</a>
+	<script>pokemons[{{ pokemon.id }}]=(JSON.parse(("{{ pokemon.json }}").replace(/\&quot;/g,'"')));</script>
+         <div class="container">
+			<div class="row">
+				<div class="col pokemon_evolution_name">
+					<a onclick="go();" data="'path':'pokemonfiche', 'id':{{  pokemon.id }}">
+						<strong class="attribut pokemon_name">{{ pokemon.name }}</strong>
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col pokemon_evolution_image">
+					<a onclick="go();" data="'path':'pokemonfiche', 'id':{{  pokemon.id }}">
+						<img  class="attribut pokemon_image" src="{{ pokemon.image }}" alt="" /> 
+					</a>
+				</div>
+			</div>
+			<hr>
+		</div>
 <br>{% else %}
         No pokemons yet.
     {% endfor %}
 </p>
+
+<script>evolution();</script>
+
 {% endblock %}

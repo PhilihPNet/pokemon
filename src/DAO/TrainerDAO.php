@@ -24,11 +24,11 @@ class TrainerDAO extends DAO
     }
 
     /**
-     * Returns an article matching the supplied id.
+     * Returns an trainer matching the supplied id.
      *
-     * @param integer $id The article id.
+     * @param integer $id The trainer id.
      *
-     * @return \pokemon\Domain\trainer|throws an exception if no matching article is found
+     * @return \pokemon\Domain\trainer|throws an exception if no matching trainer is found
      */
     public function find($id) {
         $sql = "select * from trainer where id=?";

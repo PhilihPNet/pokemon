@@ -1,13 +1,11 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}{{ pokemon.name }}{% endblock %}
-{% block reinit %}<a class="navbar-brand" onclick="reinit();" title="réinitialiser tous les pokémons">réinitialiserPokemons</a>{% endblock %}
-
 {% block content %}
 	<script>pokemons[{{ pokemon.id }}]=(JSON.parse(("{{ pokemon.json }}").replace(/\&quot;/g,'"')));</script>
 
 <p>
-   <h2><span id="pokemon_name">{{ pokemon.name }} </span><img id="pokemon_image" src="{{ pokemon.image }}"></h2>
+   <h2>{{ pokemon.name }} <img id="pokemon_level" src="{{ pokemon.image }}"></h2></h2>
     <p>Type: 
 		<strong>
 			{{ pokemon.type_1 }}
@@ -17,11 +15,9 @@
 		</strong>
 	</p>
     {% if pokemon.level %}
-		<p>team :		<span id="pokemon_id_team" >{{  pokemon.id_team }}		</span></p>
+		
 		<p>level :		
-			<button onclick="upGrade({{ pokemon.id_team }});" title="click to upgrade">
 				<strong id="pokemon_level" >{{  pokemon.level }}</strong>
-			</button>
 		</p>
 		<p>entraineur: 
 			<a href="{{ path('trainer', { 'id': pokemon.id_trainer }) }}">

@@ -49,6 +49,11 @@ class Pokemon
      * @var integer
      */
     private $level_evolution;
+     /** pokemon evolution.
+     * Associated pokemon.
+     * @var \pokemon\Domain\pokemon
+	*/
+    private $evolution;
      /** pokemon image.
      * @var blob
      */
@@ -69,7 +74,15 @@ class Pokemon
      * @var integer
      */
     private $desc_attack;
-	
+    /**
+     * pokemon id_team.
+     * @var integer
+     */
+    private $id_team;
+    /**
+     * pokemon json.
+     * @var integer
+     */
     private $json;
 
     /**
@@ -86,7 +99,10 @@ class Pokemon
 	function json() {
 		$json="";
      foreach ($this as $key => $value) {
-         if(!is_object($key)&&!is_object($value))$json.= ($json ==''?'':',')."'$key': '$value'";
+         if(($key!="trainer")&&($key!="json")&&($key!="evolution"))
+				$json.= ($json ==''?'':',').'"'.$key.'":"'.$value.'"';
+		 if(($key=="evolution")){$json.= ($json ==''?'':',').'"'.$key.'":'.($value?$value:'false').'';}
+	
      }
 	 return $this->json='{'.$json.'}';
   }
@@ -195,6 +211,16 @@ class Pokemon
         $this->level_evolution=$level_evolution;
         return $this;
     }
+
+    public function getEvolution() {
+        return $this->evolution;
+    }
+
+    public function setEvolution($evolution) {
+        $this->evolution=$evolution;
+        return $this;
+    }
+
     public function getId_Attack() {
         return $this->id_attack;
     }
@@ -234,6 +260,14 @@ class Pokemon
 	
     public function setLevel($level) {
         $this->level=$level;
+        return $this;
+    }
+    public function getId_Team() {
+        return $this->id_team;
+    }
+
+    public function setId_Team($id_team) {
+        $this->id_team = $id_team;
         return $this;
     }
 
