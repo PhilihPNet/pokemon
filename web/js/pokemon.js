@@ -46,7 +46,6 @@ var c=0;
  function degreEvolution(pokemon,target,attribut){
 	var modele=target.cloneNode(true);
 	var a=modele.getElementsByTagName('a')[0];
-	a.parent=new Function('return modele.parentNode');
 	a.innerHTML=attribut!='image'
 					?'<span class="attribut pokemon_'+attribut+'">'+pokemon[attribut]+'</strong>'
 					:'<img  class="attribut pokemon_image" src="'+pokemon[attribut]+'" alt="" /> '
@@ -59,6 +58,11 @@ var c=0;
 			target.innerHTML+='<div id="pokemon_evolution_'+pokemon.evolution.id+'"></div>';
 			degreEvolution(pokemon.evolution,target,attribut);
 
+ }
+ function go(a){
+		a.getData=new Function( 'return JSON.parse("{"+this.getAttribute("data").replace(/\'/g,\'"\')+"}")');
+		document.location.href=a.getData().path+'/'+a.getData().id;
+ 
  }
   function reinit(){
 	  if(pokemons)for(var pokemon in pokemons){
